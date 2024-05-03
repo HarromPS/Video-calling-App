@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Join Room - User{% endblock title %}
+
+{% comment %}
+In Dashboard user is Logged in
+
+So sign up and login is disabled and logout is enabled
+{% endcomment %}
+
+{% block signUpUser %}
+{% comment %}
+This is empty, when user is not logged in it is not visible
+<li class="nav-item"><a class="nav-link active" aria-current="page" href="/home/signup/">Sign Up</a></li>
+{% endcomment %}
+{% endblock signUpUser %}
+
+
+{% block loginUser %}
+{% comment %}
+This is empty, when user is not logged in it is not visible
+<li class="nav-item"><a class="nav-link active" aria-current="page" href="/home/login/">Login</a></li>
+{% endcomment %}
+{% endblock loginUser %}
+
+{% block logoutUser %}
+<li class="nav-item"><a class="nav-link active" aria-current="page" href="/home/logout/"> Logout</a></li>
+{% endblock logoutUser %}
+
+{% block body %}
+<div class="width-80">
+    <header>Join Room</header>
+    <form action="/home/join_meet/" method="POST">
+      {% csrf_token %}
+      <input type="text" placeholder="Enter room ID" name="roomID">
+      <input type="submit" class="button" value="Join">
+      <center>
+        {% if success %}
+        <p style="color: green;"><b>{{ success }}</b></p>
+        {% endif %}
+        {% if error %}
+        <p style="color: red;">{{ error }}</p>
+        {% endif %}
+      </center>
+    </form>
+</div>
+{% endblock body %}

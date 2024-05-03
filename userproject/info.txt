@@ -1,0 +1,38 @@
+Creating users 
+
+Direct way: create_user() function
+from django.contrib.auth.models import User
+user = User.objects.create_user("john", "lennon@thebeatles.com", "johnpassword")
+
+1. User authentication
+    => Use authenticate() to verify a set of credentials.
+    => credentials as keyword arguments, username and password for default case against authentication backend
+    => if valid it returns a User objects
+    => raises  PermissionDenied, it returns None
+
+1. import Users from auth User module 
+    from django.contrib.auth import authenticate
+    
+    # login
+    username = request.POST.get('username');
+    password = request.POST.get('password');
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        # A backend authenticated the credentials   
+        messages.success(request, "Logged In Successfully!")
+        return redirect('/')
+    
+    else:
+        # No backend authenticated the credentials
+        messages.success(request, "Invalid Credentials!")
+        return render(request, 'login.html');
+
+    # index page
+
+2. Check if a user is anynomous(user who is not logged in)
+    => if request.user.is_anonymous:
+        return redirect('/login');
+
+3. Logout
+    => logout(request);
+    return redirect('/home/login/');    
